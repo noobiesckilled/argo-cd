@@ -192,6 +192,13 @@ data:
 
 After modifying `kustomize.buildOptions`, you may need to restart ArgoCD for the changes to take effect.
 
+When an Application sets `spec.source.kustomize.version`, the build options registered for that version are used instead of the default `kustomize.buildOptions`. If no options are registered for that version, the default `kustomize.buildOptions` value is used.
+
+> [!NOTE]
+> `argocd app diff --local` reads the version-specific paths and build options from the settings API.
+> These values are only returned to authenticated users, so log in with `argocd login` before running a local diff.
+> The binary path registered for the version must also exist on the machine that runs the CLI.
+
 ## Custom Kustomize versions
 
 Argo CD supports using multiple Kustomize versions simultaneously and specifies required version per application.
